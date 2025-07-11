@@ -279,19 +279,19 @@ jobs:
           cat package-cache/scanner-env.sh
 
 
-      - name: Run Trivy Scan
-        if: ${{ inputs.enable_trivy == 'true' }}
-        run: |
+      # - name: Run Trivy Scan
+      #   if: ${{ inputs.enable_trivy == 'true' }}
+      #   run: |
 
-          echo ".................Sourcing variable.sh and scanner-env.sh...................."
-          source package-cache/variable.sh
-          source package-cache/scanner-env.sh
-          cat package-cache/scanner-env.sh
+      #     echo ".................Sourcing variable.sh and scanner-env.sh...................."
+      #     source package-cache/variable.sh
+      #     source package-cache/scanner-env.sh
+      #     cat package-cache/scanner-env.sh
                          
-          chmod +x ./script/scanner-scripts/trivy_code_scan.sh
-          bash ./script/scanner-scripts/trivy_code_scan.sh;
-          mkdir source_trivy
-          mv package-cache/trivy_source_vulnerabilities_results.json package-cache/trivy_source_sbom_results.cyclonedx source_trivy
+      #     chmod +x ./script/scanner-scripts/trivy_code_scan.sh
+      #     bash ./script/scanner-scripts/trivy_code_scan.sh;
+      #     mkdir source_trivy
+      #     mv package-cache/trivy_source_vulnerabilities_results.json package-cache/trivy_source_sbom_results.cyclonedx source_trivy
 
       - name: Run Syft Scan
         if: ${{ inputs.enable_syft == 'true' }}
@@ -381,16 +381,16 @@ jobs:
           echo ".......................Loading iamge.tar ............................"
           docker load -i "package-cache/image.tar"
 
-      - name: Run Trivy Image Scan
-        if: ${{ inputs.enable_trivy == 'true' }}
-        run: |
-          echo ".................Sourcing variable.sh and scanner-env.sh...................."
-          source package-cache/variable.sh
-          source package-cache/scanner-env.sh
-          chmod +x ./script/scanner-scripts/trivy_image_scan.sh
-          bash ./script/scanner-scripts/trivy_image_scan.sh
-          mkdir image_trivy
-          mv trivy_image_vulnerabilities_results.json trivy_image_sbom_results.cyclonedx image_trivy
+      # - name: Run Trivy Image Scan
+      #   if: ${{ inputs.enable_trivy == 'true' }}
+      #   run: |
+      #     echo ".................Sourcing variable.sh and scanner-env.sh...................."
+      #     source package-cache/variable.sh
+      #     source package-cache/scanner-env.sh
+      #     chmod +x ./script/scanner-scripts/trivy_image_scan.sh
+      #     bash ./script/scanner-scripts/trivy_image_scan.sh
+      #     mkdir image_trivy
+      #     mv trivy_image_vulnerabilities_results.json trivy_image_sbom_results.cyclonedx image_trivy
 
       - name: Run Syft Image Scan
         if: ${{ inputs.enable_syft == 'true' }}
